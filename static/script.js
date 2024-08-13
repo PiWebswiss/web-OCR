@@ -3,6 +3,8 @@ const uploadFile = document.getElementById("uploadFile");
 const dropArea = document.getElementById("dropArea");
 const fileInput = document.getElementById("fileInput");
 const getFileBtn = document.getElementById("getFileBtn");
+const btnSelectLang = document.getElementById("btnSelectLang");
+const dropdownMenu = document.getElementById("dropdownMenu");
 const userFeedBack = document.getElementById("userFeedBack");
 const tableFeedBack = document.getElementById("tableFeedBack");
 const animatedText = document.getElementById("animatedText");
@@ -12,7 +14,7 @@ const deleteBtn = document.getElementById("deleteBtn");
 const deleteResponse = document.getElementById("deleteResponse");
 
 // Initialize variable to save the current predicted text
-let saveText;
+let saveText, modelLang; 
 
 // Create an Intl.DateTimeFormat object for local date and time formatting
 const dateFormatter = new Intl.DateTimeFormat('default', {
@@ -25,6 +27,51 @@ const dateFormatter = new Intl.DateTimeFormat('default', {
     hour12: false, // Use 24-hour time format
 });
 
+// Supported OCR languages engine 1
+/* const langSupported = {
+    "Arabic": "ara",
+    "Bulgarian": "bul",
+    "Chinese (Simplified)": "chs",
+    "Chinese (Traditional)": "cht",
+    "Croatian": "hrv",
+    "Danish": "dan",
+    "Dutch": "dut",
+    "English": "eng",
+    "Finnish": "fin",
+    "French": "fre",
+    "German": "ger",
+    "Greek": "gre",
+    "Hungarian": "hun",
+    "Korean": "kor",
+    "Italian": "ita",
+    "Japanese": "jpn",
+    "Polish": "pol",
+    "Portuguese": "por",
+    "Russian": "rus",
+    "Slovenian": "slv",
+    "Spanish": "spa",
+    "Swedish": "swe",
+    "Turkish": "tur"
+}; */
+
+// Supported OCR languages engine 2
+// Added a default seting (en)
+const langSupported = {
+    "Default" : "Language",
+    "Chinese (Simplified)": "chs",
+    "Danish": "dan",
+    "Dutch": "dut",
+    "English": "eng",
+    "Finnish": "fin",
+    "French": "fre",
+    "German": "ger",
+    "Italian": "ita",
+    "Portuguese": "por",
+    "Slovenian": "slv",
+    "Spanish": "spa",
+    "Swedish": "swe",
+
+};
 // Create a new Date object
 const datetime = new Date();
 
@@ -126,6 +173,42 @@ function handleDrag(event) {
     }
 }
 
+// Function to display suported languages
+function displayLang() {
+
+    for (let lang in langSupported) {
+        // new scope which allows "const" to be used safely and effectively 
+        const langCode = langSupported[lang];
+        const li = document.createElement("li");
+        li.classList.add("dropdown-item", "dropdown-lang-style");
+        li.textContent = lang;
+        // Add a unique ID
+        li.id = `lang-${lang}`;
+
+        // Add click event listener
+        li.addEventListener("click", () => {
+            // Check if lang I default 
+            if (lang === "Default") {
+                // Change the button to the lang choosen
+                btnSelectLang.innerText = langCode;
+                // Set the model languages to null so default values (eng)
+                modelLang = null;
+            }
+            else {
+                // Change the button to the lang choosen
+                btnSelectLang.innerText = lang;
+                // Save user selected languages code (ex: eng)
+                modelLang = langCode;
+            }
+        });
+
+        // Append language list 
+        dropdownMenu.appendChild(li);
+    }
+}
+displayLang();
+
+
 // Function to setup the application
 function setupApplication() {
     // Add drag-and-drop functionality
@@ -154,27 +237,6 @@ function setupApplication() {
 }
 setupApplication();
 
-// Function to send and receive response
-async function fetchDataViaPost(route) {
-    if (!route) {
-        return null;
-    }
-    try {
-        let response = await fetch(route, {
-            method: "POST",
-        });
-
-        // Check response and get the results
-        if (response.ok) {
-            let results = await response.json();
-            return results;
-        }
-
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        return null;
-    }
-}
 
 // Initialize an array to store all predictions
 let predictions = [];
@@ -311,6 +373,10 @@ async function handleFileUpload(file, overlay=false, api_key=apiKey, language="e
         showFeedback("Please provide at least one file.", "error", userFeedBack);
         return;
     }
+
+    // Set the language, defaulting to English if no selection is made
+    language = modelLang || "eng";
+    console.log(modelLang)
 
     // Construct a set of key/value pairs
     let formData = new FormData();
@@ -477,4 +543,4 @@ setInterval(() => {
 // Get the footerDate element by its id
 const footerDate = document.getElementById("footerDate");
 // Populate the footerDate element with the current year
-footerDate.innerHTML = `Project CS50x &copy; Harvard University - ${datetime.getFullYear()}`;
+footerDate.innerHTML = `Project CS50x &copy - ${datetime.getFullYear()}`;
