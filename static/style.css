@@ -267,6 +267,12 @@ html {
   cursor: pointer;
 }
 
+.dropdown-menu .dropdown-item.dropdown-lang-style:hover {
+  background-color: #999b9c; /* Custom hover background color */
+  color: white; /* Custom hover text color */
+}
+
+
 .copy-text-box {
   display: flex;
   align-items: flex-start;

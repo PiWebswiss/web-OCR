@@ -3,6 +3,9 @@ let lang;
 // Define translations dictionary
 const translations = {
     'en': {
+        'nav-1': 'Perform OCR',
+        'nav-2': 'OCR history',
+        'nav-3': 'How to use OCR',
         'h1': 'Optical Character Recognition',
         'p1': 'Or commonly called OCR is a technology that recognizes text within an image. There are different ways of achieving OCR one common approach is to use deep learning. I\'ve implemented a system to recognize text from an image.',
         'p2': 'You can try optical character recognition using the interface below. Default recognise language is English. I have enabled auto-submit for faster responses, so don\'t have to wait too long to see the results.',
@@ -34,38 +37,47 @@ const translations = {
         'btn-delete': 'Delete your data',
     },
     'fr': {
-    'h1': 'Reconnaissance optique de caractères',
-    'p1': "Appelée couramment ROC, c'est une technologie qui reconnaît le texte dans une image. Il existe différentes manières de réaliser la ROC, l'une des approches courantes étant l'apprentissage profond. J'ai implémenté un système pour reconnaître le texte d'une image.",
-    'p2': "Vous pouvez essayer la reconnaissance optique de caractères en utilisant l'interface ci-dessous. Pour l'instant, seul l'anglais est pris en charge.",
-    'h3-1': 'Reconnaissance optique de caractères',
-    'span-1': 'Cliquez pour télécharger le fichier',
-    'drop-text': 'ou glissez-déposez votre fichier ici',
-    'btn-choose-image': 'Choisir une image',
-    'btn-submit': 'Soumettre',
-    'btn-copy-1': 'Copier le texte',
-    'h4-1': 'Votre historique',
-    'table-title-1': 'Date et heure',
-    'table-title-2': 'Texte détecté',
-    '0p-1': 'Pour extraire le texte d\'une image, il suffit de glisser-déposer votre image ou d\'utiliser le bouton "Choisir une image". Votre image est automatiquement soumise et le texte extrait est renvoyé.',
-    '0p-2': 'Le texte est sauvegardé pendant 2 heures dans le stockage de votre navigateur, vous permettant de le copier.',
-    '0p-3': 'Après 2 heures, l\'historique ROC est supprimé, assurez-vous donc de copier votre texte !',
-    '0p-5': 'N\'envoyez pas d\'images sensibles, car il n\'y a pas de protection en place, et votre image peut être utilisée par <a href="https://ocr.space/ocrapi" target="_blank">OCR Space</a>.',
-    '1p-1': 'J\'utilise l\'<a href="https://ocr.space/ocrapi" target="_blank">API OCR Space</a> pour effectuer la reconnaissance optique de caractères sur les images. Elle offre une bonne précision et est rapide.',
-    '1p-2': 'Vous avez une limite de 500 requêtes par jour avec leur OCR Engine 2.',
-    '1p-3': 'OCR Space est un service ROC basé sur le cloud qui peut extraire le texte trouvé dans une image.',
-    '1p-4': 'Il prend en charge plusieurs langues, mais actuellement, seul l\'anglais est pris en charge dans mon application.',
-    '1p-5': 'Il prend en charge divers formats d\'images, y compris PNG, JPEG, PDF et offre une excellente précision.',
-    '1p-6': 'Pour l\'instant, seules les images sont prises en charge, la ROC avec vidéo arrive bientôt !',
-    '1p-7': 'Lien vers <a href="https://ocr.space/ocrapi" target="_blank">l\'API OCR Space</a>',
-    'a-back-to-top': 'Retour en haut',
-    'footer-p1': 'Tout le code est open source. Vous pouvez le trouver dans le <a href="#">GitHub</a>.',
-    'footer-p2': 'Votre texte prédit est sauvegardé pendant deux heures pour que vous puissiez le copier. Ensuite, vos données sont supprimées.',
-    'footer-p3': 'Un processus de nettoyage est lancé toutes les heures pour supprimer les données expirées.',
-    'footer-p4': 'Si vous le souhaitez, vous pouvez supprimer toutes les données stockées sur votre appareil en utilisant le bouton ci-dessous.',
-    'btn-delete': 'Supprimer vos données',
-    }
+        'nav-1': 'Reconnaissance de texte',
+        'nav-2': 'Historique',
+        'nav-3': "Mode d'emploi",
+        'h1': 'Reconnaissance optique de caractères',
+        'p1': "C'est une technologie qui reconnaît le texte dans une image. Il existe différentes méthodes, l'une des approches courantes étant le deep learning. J'ai implémenté un système pour reconnaître le texte d'une image",
+        'p2': "Essayer la reconnaissance optique de caractères en utilisant l'interface ci-dessous.",
+        'h3-1': 'Reconnaissance optique de caractères',
+        'span-1': 'Cliquez pour télécharger le fichier',
+        'drop-text': 'ou glissez-déposez votre fichier ici',
+        'btn-choose-image': 'Choisir une image',
+        'btn-submit': 'Soumettre',
+        'btn-copy-1': 'Copier le texte',
+        'h4-1': 'Votre historique',
+        'table-title-1': 'Date et heure',
+        'table-title-2': 'Texte détecté',
+        '0p-1': 'Pour extraire le texte d\'une image, il suffit de glisser-déposer votre image ou d\'utiliser le bouton "Choisir une image". Votre image est automatiquement soumise et le texte extrait est renvoyé.',
+        '0p-2': 'Le texte est sauvegardé pendant 2 heures dans le stockage de votre navigateur, vous permettant de le copier.',
+        '0p-3': 'Après 2 heures, l\'historique est supprimé, assurez-vous donc de copier votre texte !',
+        '0p-5': 'N\'envoyez pas d\'images sensibles, car il n\'y a pas de protection en place, et votre image peut être utilisée par <a href="https://ocr.space/ocrapi" target="_blank">OCR Space</a>.',
+        '1p-1': 'J\'utilise l\'<a href="https://ocr.space/ocrapi" target="_blank">API OCR Space</a> pour effectuer la reconnaissance optique de caractères sur les images. Elle offre une bonne précision et est rapide.',
+        '1p-2': 'Vous avez une limite de 500 requêtes par jour avec leur OCR Engine 2.',
+        '1p-3': 'OCR Space est un service basé sur le cloud qui peut extraire le texte trouvé dans une image.',
+        '1p-4': 'Il prend en charge plusieurs langues, mais actuellement, seul l\'anglais est pris en charge dans mon application.',
+        '1p-5': 'Il prend en charge divers formats d\'images, y compris PNG, JPEG, PDF et offre une excellente précision.',
+        '1p-6': 'Pour l\'instant, seules les images sont prises en charge, la reconnaissance de text sur vidéo arrive bientôt !',
+        '1p-7': 'Lien vers <a href="https://ocr.space/ocrapi" target="_blank">l\'API OCR Space</a>',
+        'a-back-to-top': 'Retour en haut',
+        'footer-p1': 'Tout le code est open source. Vous pouvez le trouver dans le <a href="#">GitHub</a>.',
+        'footer-p2': 'Votre texte prédit est sauvegardé pendant deux heures pour que vous puissiez le copier. Ensuite, vos données sont supprimées.',
+        'footer-p3': 'Un processus de nettoyage est lancé toutes les heures pour supprimer les données expirées.',
+        'footer-p4': 'Si vous le souhaitez, vous pouvez supprimer toutes les données stockées sur votre appareil en utilisant le bouton ci-dessous.',
+        'btn-delete': 'Supprimer vos données',
+        }
 
 };
+
+// meta description tag 
+metaLang = {
+    "en": "Optical Character Recognition",
+    "fr": "Reconnaissance optique de caractères",
+}
 
 
 // Function to translate elements based on data-translate attribute
@@ -84,6 +96,11 @@ function translatePage(lang) {
             element.innerHTML = translation;
         }
     });
+
+    // Change the language attribute
+    document.documentElement.lang = lang;
+    // Change the content of the meta description tag
+    document.querySelector('meta[name="description"]').setAttribute("content", metaLang[lang]);
 }
 
 
@@ -102,8 +119,8 @@ document.getElementById('translateToFr').addEventListener('click', function() {
   });
   
   
-  
-  // Set initial language default ("en")
-  lang = localStorage.getItem('lang') || 'en';
-  /* Translate page */
-  translatePage(lang);
+
+// Set initial language default ("en")
+lang = localStorage.getItem('lang') || 'en';
+/* Translate page */
+translatePage(lang);
