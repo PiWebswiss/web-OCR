@@ -366,7 +366,7 @@ function extractTextFromApi(jsonResponse, mainKey="ParsedResults", textKey="Pars
 const ocrUrl = 'https://api.ocr.space/parse/image';
 
 // Function to handle file upload to OCR Space API
-const apiKey = "K88129223388957" /* TO CHANGE !!!!!!!!!! */
+const apiKey = atob("aGVsbG93b3JsZA==")
 async function handleFileUpload(file, overlay=false, api_key=apiKey, language="eng") {
     // Ensure files are valid
     if (file.length === 0) {
