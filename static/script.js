@@ -360,13 +360,12 @@ function extractTextFromApi(jsonResponse, mainKey="ParsedResults", textKey="Pars
     return null; 
 }
 
-
 // Define OCR.Space API URL
 // https://ocr.space/
 const ocrUrl = 'https://api.ocr.space/parse/image';
 
 // Function to handle file upload to OCR Space API
-const apiKey = atob("aGVsbG93b3JsZA==")
+const apiKey = atob("Szg4MTI5MjIzMzg4OTU3")
 async function handleFileUpload(file, overlay=false, api_key=apiKey, language="eng") {
     // Ensure files are valid
     if (file.length === 0) {
@@ -376,7 +375,6 @@ async function handleFileUpload(file, overlay=false, api_key=apiKey, language="e
 
     // Set the language, defaulting to English if no selection is made
     language = modelLang || "eng";
-    console.log(modelLang)
 
     // Construct a set of key/value pairs
     let formData = new FormData();
@@ -411,6 +409,11 @@ async function handleFileUpload(file, overlay=false, api_key=apiKey, language="e
         // Access data
         if (result) {
             let text = extractTextFromApi(jsonResponce=result);
+             // Ensure we have some text to display
+            if (!text || text.trim() == "") {
+                showFeedback("No text.", "info", userFeedBack); 
+                return
+            }
             typeText(text, animatedText);
             saveToLocaleStorage(text)
             showResultsTable();
@@ -418,11 +421,13 @@ async function handleFileUpload(file, overlay=false, api_key=apiKey, language="e
 
             // Clear file input after OCR is done
             fileInput.value = "";
+           
         }
     } catch (error) {
         showFeedback("Invalid request.", "error", userFeedBack);
     }
 }
+
 
 // Handle form submission via AJAX 
 uploadFile.addEventListener("submit", async (event) => {
@@ -481,8 +486,8 @@ deleteBtn.addEventListener("click", async () => {
     deleteResponse.innerText = "";
 
     if (localStorage.getItem("predictions")) {
-        // Clear local storage
-        localStorage.clear();
+        // Clear local storage user data
+        localStorage.removeItem("predictions");
         // Update table
         showResultsTable(); 
         // Show user feedback
@@ -543,4 +548,4 @@ setInterval(() => {
 // Get the footerDate element by its id
 const footerDate = document.getElementById("footerDate");
 // Populate the footerDate element with the current year
-footerDate.innerHTML = `Project CS50x &copy - ${datetime.getFullYear()}`;
+footerDate.innerHTML = `Web OCR &copy - ${datetime.getFullYear()}`;

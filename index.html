@@ -46,8 +46,8 @@
     </nav>
     <!-- OCR video -->
     <div class="video-container">
-        <video class="responsive-video" autoplay muted loop>
-            <source src="static/video/ocr-text-video.MP4" type="video/mp4">
+        <video class="responsive-video" autoplay muted loop playsinline>
+            <source src="static/video/ocr-text-video.webm" type="video/webm">
             Your browser does not support the video format.
         </video>
     </div>
@@ -88,7 +88,7 @@
             </div>
           <!-- Container for buttons with Bootstrap classes for horizontal alignment -->
             <div class="d-flex align-items-center justify-content-center gap-3">
-              <button type="button" id="getFileBtn" class="btn btn-secondary">Choisir une image</button> <!-- First button -->
+              <button data-translate="btn-choose-image" type="button" id="getFileBtn" class="btn btn-secondary">Choose an image</button>
               <div class="dropdown"> 
                 <!-- button with dropdown -->
                 <button id="btnSelectLang" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -204,6 +204,8 @@
       </div>
     </div>
   </footer>
+
+  <div id="err" class="fs-2"></div>
 
 </body>
 </html>
